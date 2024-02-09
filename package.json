@@ -1,0 +1,56 @@
+{
+    "name": "vercel-env-push-action",
+    "version": "0.0.0",
+    "private": true,
+    "description": "vercel env push action",
+    "keywords": [
+        "github",
+        "actions",
+        "vercel",
+        "env",
+        "push",
+        "sync"
+    ],
+    "homepage": "https://github.com/pentible/vercel-env-push-action",
+    "bugs": {
+        "url": "https://github.com/pentible/vercel-env-push-action/issues"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/pentible/vercel-env-push-action.git"
+    },
+    "license": "MIT",
+    "author": "",
+    "type": "module",
+    "exports": {
+        ".": "./dist/index.js"
+    },
+    "scripts": {
+        "build": "ncc build src/index.ts --license licenses.txt",
+        "dev": "npm run build -- --watch",
+        "prepare": "husky install"
+    },
+    "dependencies": {
+        "@actions/core": "^1.10.1",
+        "@actions/github": "6.0.0"
+    },
+    "devDependencies": {
+        "@pentible/check-package-lock": "0.92.0",
+        "@pentible/eslint-config": "0.92.0",
+        "@pentible/eslint-config-node": "0.92.0",
+        "@pentible/eslint-config-prettier": "0.92.0",
+        "@pentible/prettier": "0.92.0",
+        "@pentible/shellcheck-all": "0.92.0",
+        "@pentible/tsconfig": "0.92.0",
+        "@types/node": "^20.11.16",
+        "@vercel/ncc": "^0.38.1",
+        "eslint": "^8.46.0",
+        "husky": "8.0.3",
+        "lint-staged": "13.2.3",
+        "prettier": "3.0.3",
+        "typescript": "^5.1.6"
+    },
+    "engines": {
+        "node": ">=20"
+    }
+}

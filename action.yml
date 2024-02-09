@@ -1,0 +1,43 @@
+name: vercel-env-push-action
+description: Sync env vars with a vercel project
+author: pentible
+branding:
+  icon: refresh-cw
+  color: gray-dark
+
+runs:
+  using: node20
+  main: dist/index.js
+
+inputs:
+  # TODO: add inputs
+  ref:
+    description:
+      Find check run for this commit ref. The ref can be a SHA, branch name, or
+      a tag name (defaults to current sha)
+    required: true
+    default: ${{ github.sha }}
+  owner:
+    description:
+      Owner of the repo to find the checks on (when overridden, will need to
+      specify the github-token with a PAT that has access to read checks on that
+      repo)
+    required: true
+    default: ${{ github.repository_owner }}
+  repo:
+    description:
+      Repo name to find the checks on (when overridden, will need to specify the
+      github-token with a PAT that has access to read checks on that repo)
+    required: true
+    default: ${{ github.event.repository.name }}
+  github-token:
+    description:
+      The GitHub token used to authenticate with the GitHub API. This is
+      required when downloading artifacts from a different repository.
+    required: true
+    default: ${{ github.token }}
+
+outputs:
+  # TODO: add outputs
+  conclusion:
+    description: The conclusion of the run
