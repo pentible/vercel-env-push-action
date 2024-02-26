@@ -20,8 +20,14 @@ jobs:
         run: npm ci
       # lint
       - run: npx check-package-lock
+        if: "!cancelled()"
       - run: npx shellcheck-all
+        if: "!cancelled()"
       - run: npx tsc
+        if: "!cancelled()"
       - run: npx eslint .
+        if: "!cancelled()"
       - run: npx prettier --log-level warn --check .
+        if: "!cancelled()"
       - run: ./bin/dev lint dist
+        if: "!cancelled()"

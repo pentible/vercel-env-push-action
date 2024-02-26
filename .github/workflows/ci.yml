@@ -12,11 +12,27 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Setup test data
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: |
+          vercel --token="$VERCEL_TOKEN" link --project 'vercel-env-push-action' --yes
+          echo 'plain value' | vercel --token="$VERCEL_TOKEN" env add EXAMPLE_PLAIN_OLD production
+          echo 'sensitive value' | vercel --token="$VERCEL_TOKEN" env add --sensitive EXAMPLE_SENSITIVE_OLD production
+          echo 'plain value' | vercel --token="$VERCEL_TOKEN" env add EXAMPLE_PLAIN_CHANGED production
+          echo 'sensitive value' | vercel --token="$VERCEL_TOKEN" env add --sensitive EXAMPLE_SENSITIVE_CHANGED production
       - name: Test Action
         id: action
         uses: ./
         with:
-          # TODO: add inputs
-          check-name: Validate
+          vercelToken: ${{ secrets.VERCEL_TOKEN }}
+          projectId: vercel-env-push-action
+          target: production
+          envs: |
+            {
+              "EXAMPLE_PLAIN_CHANGED": "updated plain value",
+              "EXAMPLE_SENSITIVE_CHANGED": "updated sensitive value",
+              "EXAMPLE_PLAIN_NEW": "new plain value"
+            }
       - name: Print Output
         run: echo "${{ steps.action.outputs.conclusion }}"

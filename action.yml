@@ -10,34 +10,33 @@ runs:
   main: dist/index.js
 
 inputs:
-  # TODO: add inputs
-  ref:
-    description:
-      Find check run for this commit ref. The ref can be a SHA, branch name, or
-      a tag name (defaults to current sha)
+  vercelToken:
+    description: The Vercel token used to authenticate with the Vercel API.
     required: true
-    default: ${{ github.sha }}
-  owner:
-    description:
-      Owner of the repo to find the checks on (when overridden, will need to
-      specify the github-token with a PAT that has access to read checks on that
-      repo)
+  projectId:
+    description: The name/id of the Vercel project to push to.
     required: true
-    default: ${{ github.repository_owner }}
-  repo:
+  target:
     description:
-      Repo name to find the checks on (when overridden, will need to specify the
-      github-token with a PAT that has access to read checks on that repo)
+      The name of the Vercel environment to push to (production, preview, or
+      development)
     required: true
-    default: ${{ github.event.repository.name }}
-  github-token:
+  gitBranch:
     description:
-      The GitHub token used to authenticate with the GitHub API. This is
-      required when downloading artifacts from a different repository.
+      The name/id of the git branch to push to (only when target is preview).
+  envs:
+    description:
+      The new environment variables to push (JSON map of env var names to
+      values).
     required: true
-    default: ${{ github.token }}
 
 outputs:
-  # TODO: add outputs
-  conclusion:
-    description: The conclusion of the run
+  removed:
+    description: List of the removed env vars
+  changed:
+    description: List of the changed env vars
+  added:
+    description: List of the added env vars
+  unchanged:
+    description: List of the unchanged env vars
+  # TODO: output api results per env
