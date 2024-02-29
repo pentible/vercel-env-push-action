@@ -30628,21 +30628,21 @@ async function main() {
     const oldEnvVars = Object.fromEntries(envVarResponse.envs.map((e) => [e.key, e.value]));
     const diff = diffEnvs(oldEnvVars, envs);
     if (diff.removed.length > 0) {
-        for (const [key, _] of diff.removed) {
+        for (const [key] of diff.removed) {
             console.log(`- removed: ${key}`);
         }
     }
     if (diff.changed.length > 0) {
-        for (const [key, _] of diff.changed) {
+        for (const [key] of diff.changed) {
             console.log(`- changed: ${key}`);
         }
     }
     if (diff.added.length > 0) {
-        for (const [key, _] of diff.added) {
+        for (const [key] of diff.added) {
             console.log(`- added: ${key}`);
         }
     }
-    for (const [key, _] of diff.removed) {
+    for (const [key] of diff.removed) {
         const env = envVarResponse.envs.find((e) => e.key === key);
         if (!env) {
             throw new Unreachable(`all keys to remove should come from envVarResponse, but key "${key}" was not found`);

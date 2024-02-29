@@ -16,7 +16,17 @@ jobs:
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         run: |
+          # link project
           vercel --token="$VERCEL_TOKEN" link --project 'vercel-env-push-action' --yes
+
+          # remove envs from previous runs
+          vercel --token="$VERCEL_TOKEN" env rm --yes EXAMPLE_PLAIN_NEW production || true
+          vercel --token="$VERCEL_TOKEN" env rm --yes EXAMPLE_PLAIN_OLD production || true
+          vercel --token="$VERCEL_TOKEN" env rm --yes EXAMPLE_SENSITIVE_OLD production || true
+          vercel --token="$VERCEL_TOKEN" env rm --yes EXAMPLE_PLAIN_CHANGED production || true
+          vercel --token="$VERCEL_TOKEN" env rm --yes EXAMPLE_SENSITIVE_CHANGED production || true
+
+          # setup for current run
           echo 'plain value' | vercel --token="$VERCEL_TOKEN" env add EXAMPLE_PLAIN_OLD production
           echo 'sensitive value' | vercel --token="$VERCEL_TOKEN" env add --sensitive EXAMPLE_SENSITIVE_OLD production
           echo 'plain value' | vercel --token="$VERCEL_TOKEN" env add EXAMPLE_PLAIN_CHANGED production
