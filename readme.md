@@ -4,22 +4,17 @@
 
 <!-- prettier-ignore -->
 ```yaml
-permissions:
-  contents: read # for actions/checkout
-  checks: read # for pentible/vercel-env-push-action
 steps:
   - name: Push env to vercel
     uses: pentible/vercel-env-push-action@v1.0.0
     with:
-      # ie. if check comes from a github action, it will be the job name
-      check-name: ci
-      # additional options & their defaults
-      # ref: ${{ github.sha }}
-      # owner: ${{ github.repository_owner }}
-      # repo: ${{ github.event.repository.name }}
-      # interval: 5
-      # expected-conclusions: success,skipped
-      # github-token: ${{ github.token }}
+      vercelToken: ${{ secrets.VERCEL_TOKEN }}
+      projectId: vercel-env-push-action
+      target: production
+      # NOTE: you'll probably want to pull this from some other action or step
+      envs: ${{ secrets.env }}
+      # additional options
+      # gitBranch: ${{ github.head_ref || github.ref_name }}
 ```
 
 ## Local dev

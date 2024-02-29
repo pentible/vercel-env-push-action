@@ -14,7 +14,7 @@ inputs:
     description: The Vercel token used to authenticate with the Vercel API.
     required: true
   projectId:
-    description: The name/id of the Vercel project to push to.
+    description: The name/id of the Vercel project to push to (often repo name).
     required: true
   target:
     description:
