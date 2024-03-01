@@ -27,10 +27,10 @@ jobs:
           vercel --token="$VERCEL_TOKEN" env rm --yes EXAMPLE_SENSITIVE_CHANGED production || true
 
           # setup for current run
-          echo 'plain value' | vercel --token="$VERCEL_TOKEN" env add EXAMPLE_PLAIN_OLD production
-          echo 'sensitive value' | vercel --token="$VERCEL_TOKEN" env add --sensitive EXAMPLE_SENSITIVE_OLD production
-          echo 'plain value' | vercel --token="$VERCEL_TOKEN" env add EXAMPLE_PLAIN_CHANGED production
-          echo 'sensitive value' | vercel --token="$VERCEL_TOKEN" env add --sensitive EXAMPLE_SENSITIVE_CHANGED production
+          echo -n 'plain value' | vercel --token="$VERCEL_TOKEN" env add EXAMPLE_PLAIN_OLD production
+          echo -n 'sensitive value' | vercel --token="$VERCEL_TOKEN" env add --sensitive EXAMPLE_SENSITIVE_OLD production
+          echo -n 'plain value' | vercel --token="$VERCEL_TOKEN" env add EXAMPLE_PLAIN_CHANGED production
+          echo -n 'sensitive value' | vercel --token="$VERCEL_TOKEN" env add --sensitive EXAMPLE_SENSITIVE_CHANGED production
       - name: Test Action
         id: action
         uses: ./
