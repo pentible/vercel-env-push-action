@@ -9,7 +9,8 @@ steps:
     uses: pentible/vercel-env-push-action@v1.0.0
     with:
       vercelToken: ${{ secrets.VERCEL_TOKEN }}
-      projectId: vercel-env-push-action
+      # The name/id of the Vercel project to push to (often repo name)
+      projectId: ${{ github.event.repository.name }}
       target: production
       # NOTE: you'll probably want to pull this from some other action or step
       envs: ${{ secrets.env }}
